@@ -1,4 +1,4 @@
 package edu.smarthome.service;
 
-public class SmartLockService {
+public class SmartHomeFacade {
 }

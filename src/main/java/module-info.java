@@ -5,6 +5,7 @@ module edu.smarthome {
 
     requires org.controlsfx.controls;
     requires eu.hansolo.tilesfx;
+    requires java.desktop;
 
     opens edu.smarthome to javafx.fxml;
     exports edu.smarthome;
