@@ -1,12 +1,11 @@
 package edu.smarthome.model;
 
+import edu.smarthome.pattern.behavior.command.Command;
+import edu.smarthome.pattern.behavior.command.LockDoorCommand;
 import edu.smarthome.pattern.behavior.state.LockState;
 import edu.smarthome.pattern.behavior.state.LockedState;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class SmartLock extends Device {
 
@@ -90,5 +89,10 @@ public class SmartLock extends Device {
     private static void validatePin(String pin) {
         if (pin == null || !pin.matches("\\d{4,8}"))
             throw new IllegalArgumentException("El PIN debe tener entre 4 y 8 dígitos");
+    }
+
+    @Override
+    public List<Command> lockCommands() {
+        return List.of(new LockDoorCommand(this));
     }
 }

@@ -1,11 +1,12 @@
 package edu.smarthome.model;
 
 import edu.smarthome.pattern.behavior.observer.DeviceObserver;
+import edu.smarthome.pattern.structural.composite.DeviceComponent;
 
 import java.awt.*;
 import java.util.List;
 import java.util.ArrayList;
-public abstract class Device {
+public abstract class Device implements DeviceComponent {
 
     private final String id;
     private final String name;
@@ -27,6 +28,9 @@ public abstract class Device {
         var event = new DeviceEvent(id, type,msg);
         observers.forEach(o-> o.onDeviceEvent(event));
     }
+
+    @Override public int deviceCount() { return 1; }
+    @Override public List<Device> devices() { return List.of(this); }
 
     public String getId (){
         return id;
