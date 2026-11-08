@@ -1,7 +1,11 @@
 package edu.smarthome.model;
 
+import edu.smarthome.pattern.behavior.command.Command;
+import edu.smarthome.pattern.behavior.command.SetClimateStrategyCommand;
+import edu.smarthome.pattern.behavior.command.SetTargetTemperatureCommand;
 import edu.smarthome.pattern.behavior.strategy.ClimateStrategy;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Thermostat extends Device {
@@ -49,6 +53,16 @@ public class Thermostat extends Device {
         }
         double step = Math.min(Math.abs(diff), strategy.ratePerTick());
         currentTemperature += Math.signum(diff) * step;
+    }
+
+    @Override
+    public List<Command> temperatureCommands(double target) {
+        return List.of(new SetTargetTemperatureCommand(this, target));
+    }
+
+    @Override
+    public List<Command> climateModeCommands(ClimateStrategy s) {
+        return strategy.name().equals(s.name()) ? List.of() : List.of(new SetClimateStrategyCommand(this, s));
     }
 
     public double getEffectiveSetpoint()   { return strategy.adjustSetpoint(targetTemperature); }

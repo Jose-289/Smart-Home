@@ -1,4 +1,8 @@
 package edu.smarthome.model;
+import edu.smarthome.pattern.behavior.command.Command;
+import edu.smarthome.pattern.behavior.command.SetLightPowerCommand;
+
+import java.util.List;
 
 public class Light extends Device {
 
@@ -23,4 +27,9 @@ public class Light extends Device {
 
     public boolean isOn()       { return on; }
     public int getBrightness()  { return brightness; }
+
+    @Override
+    public List<Command> powerCommands(boolean on) {
+        return (this.on == on) ? List.of() : List.of(new SetLightPowerCommand(this, on));
+    }
 }
