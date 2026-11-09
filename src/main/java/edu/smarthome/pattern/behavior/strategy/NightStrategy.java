@@ -8,7 +8,7 @@ public class NightStrategy implements ClimateStrategy{
 
     @Override
     public double adjustSetpoint(double requested){
-        return Math.max(17, Math.min(20, requested)),
+        return Math.max(17, Math.min(20, requested));
     }
 
     @Override
