@@ -7,8 +7,11 @@ module edu.smarthome {
     requires eu.hansolo.tilesfx;
     requires java.desktop;
 
-    opens edu.smarthome to javafx.fxml;
-    exports edu.smarthome;
+    exports edu.smarthome.app;
+    opens edu.smarthome.app to javafx.fxml;
+
     exports edu.smarthome.controller;
     opens edu.smarthome.controller to javafx.fxml;
+
+
 }

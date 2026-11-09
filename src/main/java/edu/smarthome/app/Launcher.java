@@ -1,9 +1,9 @@
-package edu.smarthome;
+package edu.smarthome.app;
 
 import javafx.application.Application;
 
 public class Launcher {
     public static void main(String[] args) {
-        Application.launch(HelloApplication.class, args);
+        Application.launch(SmartHomeApplication.class, args);
     }
 }
