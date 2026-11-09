@@ -28,7 +28,8 @@
             <Button text="Luces"
                     onAction="#onLightsClick"/>
 
-            <Button text="Termostato"/>
+            <Button text="Termostato"
+                    onAction="#onThermostatClick"/>
 
             <Button text="Cerradura"/>
         </HBox>
