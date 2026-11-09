@@ -10,6 +10,7 @@ import edu.smarthome.pattern.behavior.command.MacroCommand;
 import edu.smarthome.pattern.behavior.mediator.HomeMediator;
 import edu.smarthome.pattern.behavior.mediator.SmartHomeMediator;
 import edu.smarthome.pattern.behavior.observer.DeviceObserver;
+import edu.smarthome.pattern.behavior.strategy.ClimateStrategy;
 import edu.smarthome.pattern.creational.factory.DeviceSpec;
 import edu.smarthome.pattern.creational.factory.LightCreator;
 import edu.smarthome.pattern.creational.factory.SmartLockCreator;
@@ -154,6 +155,36 @@ public class SmartHomeFacade {
         }
 
         MacroCommand macro = new MacroCommand("Set temperature " + temperature + "for " + group.getName(), commands);
+
+        history.execute(macro);
+    }
+
+    public void setGroupClimateMode(DeviceGroup group, ClimateStrategy strategy){
+
+        List<Command> commands = group.climateModeCommands(strategy);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        String description = "Set climate mode for " + group.getName();
+
+        MacroCommand macro = new MacroCommand(description, commands);
+
+        history.execute(macro);
+    }
+
+    public void lockGroup(DeviceGroup group){
+
+        List<Command> commands = group.lockCommands();
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        String description = "Lock " + group.getName();
+
+        MacroCommand macro = new MacroCommand(description, commands);
 
         history.execute(macro);
     }
