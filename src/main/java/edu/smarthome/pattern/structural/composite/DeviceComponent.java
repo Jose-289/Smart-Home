@@ -16,6 +16,9 @@ public interface DeviceComponent {
     // Operaciones que se propagan por el árbol. Por defecto no hacen nada;
     // cada tipo de dispositivo sobrescribe solo las que le corresponden.
     default List<Command> powerCommands(boolean on)              { return List.of(); }
+    default List<Command> brightnessCommands(int brightness){
+        return List.of();
+    }
     default List<Command> temperatureCommands(double target)     { return List.of(); }
     default List<Command> climateModeCommands(ClimateStrategy s) { return List.of(); }
     default List<Command> lockCommands()                         { return List.of(); }

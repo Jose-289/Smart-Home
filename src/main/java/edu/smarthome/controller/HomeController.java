@@ -50,8 +50,24 @@ public class HomeController {
 
     @FXML
     private void onLightsClick(){
-        facade.setGroupPower(homeGroup, true);
-        statusLabel.setText("Grupo Casa activado");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(SmartHomeApplication.class.getResource(
+                    "/edu/smarthome/view/light-view.fxml"));
+
+            Scene scene = new Scene(loader.load());
+
+            LightController controller = loader.getController();
+            controller.configure(facade, light);
+
+            Stage stage = new Stage();
+            stage.setTitle("Luces");
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
