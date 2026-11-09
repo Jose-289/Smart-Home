@@ -4,7 +4,9 @@ import edu.smarthome.model.Device;
 import edu.smarthome.model.Light;
 import edu.smarthome.model.SmartLock;
 import edu.smarthome.model.Thermostat;
+import edu.smarthome.pattern.behavior.command.Command;
 import edu.smarthome.pattern.behavior.command.CommandHistory;
+import edu.smarthome.pattern.behavior.command.MacroCommand;
 import edu.smarthome.pattern.behavior.mediator.HomeMediator;
 import edu.smarthome.pattern.behavior.mediator.SmartHomeMediator;
 import edu.smarthome.pattern.behavior.observer.DeviceObserver;
@@ -106,6 +108,54 @@ public class SmartHomeFacade {
         }
 
         mediator.lockHome();
+    }
+
+    public DeviceGroup createGroup(String name){
+        DeviceGroup group = new DeviceGroup(name);
+        groups.add(group);
+        return group;
+    }
+
+    public void addDeviceToGroup(Device device, DeviceGroup group){
+        group.add(device);
+    }
+
+    public void removeDeviceFromGroup(Device device, DeviceGroup group){
+        group.remove(device);
+    }
+
+    public void setGroupPower(DeviceGroup group, boolean on){
+
+        List<Command> commands = group.powerCommands(on);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        String description;
+
+        if (on){
+            description = "Turn on " + group.getName();
+        }else {
+            description = "Turn off " + group.getName();
+        }
+
+        MacroCommand macro = new MacroCommand(description, commands);
+
+        history.execute(macro);
+    }
+
+    public void setGroupTemperature(DeviceGroup group, double temperature){
+
+        List<Command> commands = group.temperatureCommands(temperature);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        MacroCommand macro = new MacroCommand("Set temperature " + temperature + "for " + group.getName(), commands);
+
+        history.execute(macro);
     }
 
     public void undo(){
