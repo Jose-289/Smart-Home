@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="20"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="edu.smarthome.controller.HomeController">
+
+    <padding>
+        <Insets top="25" right="25" bottom="25" left="25"/>
+    </padding>
+
+    <Label text="SMART HOME"
+           style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+
+    <Label text="Sistema de hogar inteligente"
+           style="-fx-font-size: 16px;"/>
+
+    <VBox spacing="10">
+        <Label text="Dispositivos"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="10">
+            <Button text="Luces"
+                    onAction="#onLightsClick"/>
+
+            <Button text="Termostato"
+                    onAction="#onThermostatClick"/>
+
+            <Button text="Cerradura"/>
+        </HBox>
+    </VBox>
+
+    <VBox spacing="10">
+        <Label text="Grupos"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <Button text="Activar grupo"
+                onAction="#onGroupsClick"/>
+    </VBox>
+
+    <VBox spacing="10">
+        <Label text="Seguridad"
+               style="-fx-font-size: 18px; -fx-font-weight: bold;"/>
+
+        <HBox spacing="10">
+            <Button text="Desbloquear casa"
+                    onAction="#onUnlockHomeClick"/>
+
+            <Button text="Bloquear casa"
+                    onAction="#onLockHomeClick"/>
+        </HBox>
+    </VBox>
+
+    <Label fx:id="statusLabel"
+           text="Sistema iniciando..."
+           style="-fx-font-size: 14px;"/>
+
+</VBox>

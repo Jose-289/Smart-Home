@@ -27,7 +27,7 @@ tasks.withType<JavaCompile> {
 
 application {
     mainModule.set("edu.smarthome")
-    mainClass.set("edu.smarthome.HelloApplication")
+    mainClass.set("edu.smarthome.app.SmartHomeApplication")
 }
 
 javafx {

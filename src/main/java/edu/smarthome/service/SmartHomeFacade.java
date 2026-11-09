@@ -205,6 +205,34 @@ public class SmartHomeFacade {
         history.execute(macro);
     }
 
+    //Crea y ejecuta el comando para cambiar la temperatura de un termostato.
+    public void setThermostatTemperature(Thermostat thermostat, double temperature){
+
+        List<Command> commands = thermostat.temperatureCommands(temperature);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        MacroCommand macro = new MacroCommand("Set thermostat temperature to " + temperature, commands);
+
+        history.execute(macro);
+    }
+
+    //Crea y ejecuta el comando para cambiar el modo climático de un termostato.
+    public void setThermostatClimateMode(Thermostat thermostat, ClimateStrategy strategy){
+
+        List<Command> commands = thermostat.climateModeCommands(strategy);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        MacroCommand macro = new MacroCommand("Set thermostat climate mode", commands);
+
+        history.execute(macro);
+    }
+
     //Permite deshacer la última operación realizada.
     public void undo(){
         history.undo();
