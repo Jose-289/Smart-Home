@@ -31,7 +31,8 @@
             <Button text="Termostato"
                     onAction="#onThermostatClick"/>
 
-            <Button text="Cerradura"/>
+            <Button text="Cerradura"
+                    onAction="#onSmartLockClick"/>
         </HBox>
     </VBox>
 
@@ -61,3 +62,4 @@
            style="-fx-font-size: 14px;"/>
 
 </VBox>
+
