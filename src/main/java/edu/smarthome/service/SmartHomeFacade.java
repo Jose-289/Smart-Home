@@ -7,10 +7,10 @@ import edu.smarthome.model.Thermostat;
 import edu.smarthome.pattern.behavior.command.Command;
 import edu.smarthome.pattern.behavior.command.CommandHistory;
 import edu.smarthome.pattern.behavior.command.MacroCommand;
-import edu.smarthome.pattern.behavior.command.SetBrightnessCommand;
 import edu.smarthome.pattern.behavior.mediator.HomeMediator;
 import edu.smarthome.pattern.behavior.mediator.SmartHomeMediator;
 import edu.smarthome.pattern.behavior.observer.DeviceObserver;
+import edu.smarthome.pattern.behavior.observer.EventLogObserver;
 import edu.smarthome.pattern.behavior.strategy.ClimateStrategy;
 import edu.smarthome.pattern.creational.factory.DeviceSpec;
 import edu.smarthome.pattern.creational.factory.LightCreator;
@@ -24,7 +24,6 @@ import java.util.List;
 public class SmartHomeFacade {
 
     private final List<Device> devices = new ArrayList<>();
-    private final List<DeviceGroup> groups = new ArrayList<>();
 
     private final CommandHistory history = new CommandHistory();
 
@@ -35,7 +34,10 @@ public class SmartHomeFacade {
     private HomeMediator mediator;
 
     public SmartHomeFacade(){
-        List<DeviceObserver> observers = List.of();
+
+        DeviceObserver eventLogObserver = new EventLogObserver();
+
+        List<DeviceObserver> observers = List.of(eventLogObserver);
 
         this.lightCreator = new LightCreator(observers);
         this.thermostatCreator = new ThermostatCreator(observers);
@@ -123,9 +125,7 @@ public class SmartHomeFacade {
 
     //Crea un grupo de dispositivos utilizando el patrón Composite.
     public DeviceGroup createGroup(String name){
-        DeviceGroup group = new DeviceGroup(name);
-        groups.add(group);
-        return group;
+        return new DeviceGroup(name);
     }
 
     //Agrega un dispositivo al grupo.
