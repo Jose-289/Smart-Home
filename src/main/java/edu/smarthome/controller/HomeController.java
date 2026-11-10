@@ -106,4 +106,24 @@ public class HomeController {
         }
     }
 
+    @FXML
+    private void onSmartLockClick() {
+        try {
+            FXMLLoader loader = new FXMLLoader(SmartHomeApplication.class.getResource(
+                    "/edu/smarthome/view/smart-lock-view.fxml"));
+
+            Scene scene = new Scene(loader.load());
+
+            SmartLockController controller = loader.getController();
+            controller.setSmartLock(this.smartLock);
+
+            Stage stage = new Stage();
+            stage.setTitle("Cerradura Inteligente");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
