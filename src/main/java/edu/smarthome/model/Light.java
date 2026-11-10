@@ -1,5 +1,6 @@
 package edu.smarthome.model;
 import edu.smarthome.pattern.behavior.command.Command;
+import edu.smarthome.pattern.behavior.command.SetBrightnessCommand;
 import edu.smarthome.pattern.behavior.command.SetLightPowerCommand;
 
 import java.util.List;
@@ -31,5 +32,10 @@ public class Light extends Device {
     @Override
     public List<Command> powerCommands(boolean on) {
         return (this.on == on) ? List.of() : List.of(new SetLightPowerCommand(this, on));
+    }
+
+    @Override
+    public List<Command> brightnessCommands(int brightness){
+        return (this.brightness == brightness) ? List.of() : List.of(new SetBrightnessCommand(this, brightness));
     }
 }

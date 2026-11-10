@@ -52,6 +52,10 @@ public class DeviceGroup implements DeviceComponent {
 
     // Cada operación se delega a los hijos (hojas u otros grupos) y se juntan los resultados
     @Override public List<Command> powerCommands(boolean on)              { return gather(c -> c.powerCommands(on)); }
+    @Override
+    public List<Command> brightnessCommands(int brightness){
+        return gather(c -> c.brightnessCommands(brightness));
+    }
     @Override public List<Command> temperatureCommands(double t)          { return gather(c -> c.temperatureCommands(t)); }
     @Override public List<Command> climateModeCommands(ClimateStrategy s) { return gather(c -> c.climateModeCommands(s)); }
     @Override public List<Command> lockCommands()                         { return gather(DeviceComponent::lockCommands); }

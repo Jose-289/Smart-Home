@@ -7,6 +7,7 @@ import edu.smarthome.model.Thermostat;
 import edu.smarthome.pattern.behavior.command.Command;
 import edu.smarthome.pattern.behavior.command.CommandHistory;
 import edu.smarthome.pattern.behavior.command.MacroCommand;
+import edu.smarthome.pattern.behavior.command.SetBrightnessCommand;
 import edu.smarthome.pattern.behavior.mediator.HomeMediator;
 import edu.smarthome.pattern.behavior.mediator.SmartHomeMediator;
 import edu.smarthome.pattern.behavior.observer.DeviceObserver;
@@ -203,6 +204,42 @@ public class SmartHomeFacade {
         MacroCommand macro = new MacroCommand(description, commands);
 
         history.execute(macro);
+    }
+
+    //Crea y ejecuta el comando para encender o apagar una luz.
+    public void setLightPower(Light light, boolean on){
+
+        List<Command> commands = light.powerCommands(on);
+
+        if (commands.isEmpty()){
+            return;
+        }
+
+        String description;
+
+        if (on){
+            description = "Turn on " + light.getName();
+        }else {
+            description = "Turn off " + light.getName();
+        }
+
+        MacroCommand macro = new MacroCommand(description, commands);
+
+        history.execute(macro);
+    }
+
+    //Crea y ejecuta el comando para cambiar el brillo de una luz.
+    public void setLightBrightness(Light light, int brightness){
+
+       List<Command> commands = light.brightnessCommands(brightness);
+
+       if (commands.isEmpty()){
+           return;
+       }
+
+       MacroCommand macro = new MacroCommand("Set brightness to " + brightness + "% for " + light.getName(), commands);
+
+       history.execute(macro);
     }
 
     //Crea y ejecuta el comando para cambiar la temperatura de un termostato.
