@@ -72,8 +72,23 @@ public class HomeController {
 
     @FXML
     private void onGroupsClick(){
-        facade.setGroupPower(homeGroup, true);
-        statusLabel.setText("Grupo Casa activado");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(SmartHomeApplication.class.getResource("/edu/smarthome/view/group-view.fxml"));
+
+            Scene scene = new Scene(loader.load());
+
+            GroupController controller = loader.getController();
+            controller.configure(facade, homeGroup);
+
+            Stage stage = new Stage();
+            stage.setTitle("Grupos");
+            stage.setScene(scene);
+            stage.show();
+
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -96,6 +111,9 @@ public class HomeController {
                     "/edu/smarthome/view/thermostat-view.fxml"));
 
             Scene scene = new Scene(loader.load());
+
+            ThermostatController controller = loader.getController();
+            controller.configure(facade, thermostat);
 
             Stage stage = new Stage();
             stage.setTitle("Termostato");

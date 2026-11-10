@@ -13,9 +13,16 @@ import javafx.scene.control.TextField;
 
 public class ThermostatController {
 
-    private final SmartHomeFacade facade = new SmartHomeFacade();
+    private SmartHomeFacade facade;
 
     private Thermostat thermostat;
+
+    public void configure(SmartHomeFacade facade, Thermostat thermostat){
+        this.facade = facade;
+        this.thermostat = thermostat;
+
+        updateView();
+    }
 
     @FXML
     private TextField temperatureField;
@@ -31,20 +38,6 @@ public class ThermostatController {
 
     @FXML
     private Label statusLabel;
-
-    @FXML
-    public void initialize(){
-
-        //Crea el termostato utilizando el Facade y Factory.
-        createThermostat("Termostato principal", 22);
-
-        updateView();
-    }
-
-    //Crea el termostato.
-    public void createThermostat(String name, double temperature){
-        thermostat = facade.createThermostat(name, temperature);
-    }
 
     //Cambia la temperatura utilizando el Facade y Command.
     public void setTemperature(double temperature){

@@ -3,57 +3,73 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.TextField?>
 <VBox alignment="CENTER" spacing="20"
+      prefWidth="380"
+      prefHeight="480"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="edu.smarthome.controller.LightController">
 
     <padding>
-        <Insets top="25" right="25" bottom="25" left="25"/>
+        <Insets top="30" right="35" bottom="30" left="35"/>
     </padding>
 
     <Label text="LUCES"
-           style="-fx-font-size: 26px; -fx-font-weight: bold;"/>
+           style="-fx-font-size: 30px; -fx-font-weight: bold;"/>
 
     <Label text="Control de iluminación"
-           style="-fx-font-size: 16px;"/>
+           style="-fx-font-size: 17px;"/>
 
     <Label fx:id="statusLabel"
            text="Estado: --"
-           style="-fx-font-size: 18px;"/>
+           style="-fx-font-size: 19px;"/>
 
-    <HBox spacing="10">
+    <HBox spacing="15" alignment="CENTER">
 
         <Button text="Encender"
-                onAction="#onTurnOnClick"/>
+                onAction="#onTurnOnClick"
+                prefWidth="105"
+                prefHeight="32"/>
 
         <Button text="Apagar"
-                onAction="#onTurnOffClick"/>
+                onAction="#onTurnOffClick"
+                prefWidth="105"
+                prefHeight="32"/>
 
     </HBox>
 
-    <VBox spacing="10">
+    <VBox alignment="CENTER" spacing="10">
 
         <Label text="Brillo (%)"
-               style="-fx-font-size: 16px;"/>
+               style="-fx-font-size: 17px; -fx-font-weight: bold;"/>
 
         <TextField fx:id="brightnessField"
-                   promptText="0 - 100"/>
+                   promptText="0 - 100"
+                   prefWidth="220"
+                   prefHeight="32"/>
 
         <Button text="Aplicar brillo"
-                onAction="#onSetBrightnessClick"/>
+                onAction="#onSetBrightnessClick"
+                prefWidth="130"
+                prefHeight="32"/>
 
-        <HBox spacing="10">
-
-            <Button text="Deshacer"
-                    onAction="#onUndoClick"/>
-
-            <Button text="Rehacer"
-                    onAction="#onRedoClick"/>
-        </HBox>
     </VBox>
+
+    <HBox spacing="15" alignment="CENTER">
+
+        <Button text="Deshacer"
+                onAction="#onUndoClick"
+                prefWidth="105"
+                prefHeight="32"/>
+
+        <Button text="Rehacer"
+                onAction="#onRedoClick"
+                prefWidth="105"
+                prefHeight="32"/>
+
+    </HBox>
 
 </VBox>
